@@ -1,14 +1,14 @@
 @extends('world.layout')
 
-@section('world-title')
-    {{ $species->name }} Traits
+@section('title')
+    Universal Trait Index
 @endsection
 
 @section('content')
-    {!! breadcrumbs(['World' => 'world', 'Species' => 'world/species', $species->name => $species->url, 'Traits' => 'world/species/' . $species->id . 'traits']) !!}
-    <h1>{{ $species->name }} Traits</h1>
+    {!! breadcrumbs(['World' => 'world', 'Universal Trait Index' => 'world/universaltraits']) !!}
+    <h1>Universal Trait Index</h1>
 
-    <p>This is a visual index of all {!! $species->displayName !!}-specific traits. Click a trait to view more info on it!</p>
+    <p>This is a visual index of all universal traits. Click a trait to view more info on it!</p>
 
     @foreach ($features as $categoryId => $categoryFeatures)
         @if (!isset($categories[$categoryId]) || (Auth::check() && Auth::user()->hasPower('edit_data')) || $categories[$categoryId]->is_visible)
@@ -30,13 +30,7 @@
                                         </a>
                                     @endif
                                     <p>
-                                        @if (!$feature->first()->is_visible)
-                                            <i class="fas fa-eye-slash mr-1"></i>
-                                        @endif
                                         {!! $feature->first()->displayName !!}
-                                        @if ($feature->first()->subtype)
-                                            <br />({!! $feature->first()->subtype->displayName !!} Subtype)
-                                        @endif
                                     </p>
                                 </div>
                             @endforeach
@@ -49,13 +43,12 @@
 @endsection
 
 @section('scripts')
-    @if (config('lorekeeper.extensions.species_trait_index.trait_modals'))
+    @if (config('lorekeeper.extensions.universal_trait_index.trait_modals'))
         <script>
             $(document).ready(function() {
                 $('.modal-image').on('click', function(e) {
                     e.preventDefault();
-
-                    loadModal("{{ url('world/species/' . $species->id . '/trait') }}/" + $(this).data('id'), 'Trait Detail');
+                    loadModal("{{ url('world/universaltraits/trait') }}/" + $(this).data('id'), 'Trait Detail');
                 });
             })
         </script>

@@ -349,4 +349,14 @@ return [
     |
     */
     'wysiwyg_comments'                                  => 1,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Allow Gallery Submissions on Prompts
+    |--------------------------------------------------------------------------
+    |
+    | Whether or not to allow gallery submissions on prompts.
+    |
+    */
+    'allow_gallery_submissions_on_prompts'              => 1,
 ];
